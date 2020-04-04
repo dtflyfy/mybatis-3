@@ -20,9 +20,14 @@ import org.apache.ibatis.datasource.unpooled.UnpooledDataSourceFactory;
 /**
  * @author Clinton Begin
  */
+
+/**
+ * 池化数据源工厂类
+ */
 public class PooledDataSourceFactory extends UnpooledDataSourceFactory {
 
   public PooledDataSourceFactory() {
+    // 可以看到这里并没有真正的池化逻辑，池化逻辑是放到 PooledDataSource来完成的
     this.dataSource = new PooledDataSource();
   }
 

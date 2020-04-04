@@ -138,6 +138,7 @@ class MetaClassTest {
   void shouldFindPropertyName() {
     ReflectorFactory reflectorFactory = new DefaultReflectorFactory();
     MetaClass meta = MetaClass.forClass(RichType.class, reflectorFactory);
+    System.out.println(meta.findProperty("RICHfield"));
     assertEquals("richField", meta.findProperty("RICHfield"));
   }
 

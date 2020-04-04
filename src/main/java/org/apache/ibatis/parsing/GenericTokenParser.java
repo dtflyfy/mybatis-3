@@ -20,7 +20,13 @@ package org.apache.ibatis.parsing;
  */
 public class GenericTokenParser {
 
+  /**
+   * 开始的token字符串
+   */
   private final String openToken;
+  /**
+   * 结束的token字符串
+   */
   private final String closeToken;
   private final TokenHandler handler;
 
@@ -35,21 +41,26 @@ public class GenericTokenParser {
       return "";
     }
     // search open token
+    // 寻找开始的openToken的位置
     int start = text.indexOf(openToken);
     if (start == -1) {
       return text;
     }
     char[] src = text.toCharArray();
-    int offset = 0;
+    int offset = 0;  // 起始查找位置
     final StringBuilder builder = new StringBuilder();
-    StringBuilder expression = null;
+    StringBuilder expression = null;    // 用于匹配openToken到closeToken之间的表达式
+    //循环匹配
     while (start > -1) {
+
+      // 转义字符
       if (start > 0 && src[start - 1] == '\\') {
         // this open token is escaped. remove the backslash and continue.
         builder.append(src, offset, start - offset - 1).append(openToken);
         offset = start + openToken.length();
       } else {
         // found open token. let's search close token.
+        // 重建或重置 expression对象
         if (expression == null) {
           expression = new StringBuilder();
         } else {

@@ -29,11 +29,13 @@ public class SetFieldInvoker implements Invoker {
     this.field = field;
   }
 
+  // 设置Field属性
   @Override
   public Object invoke(Object target, Object[] args) throws IllegalAccessException {
     try {
       field.set(target, args[0]);
     } catch (IllegalAccessException e) {
+      // 提权
       if (Reflector.canControlMemberAccessible()) {
         field.setAccessible(true);
         field.set(target, args[0]);

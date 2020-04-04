@@ -50,6 +50,7 @@ public class MetaClass {
 
   public String findProperty(String name) {
     StringBuilder prop = buildProperty(name, new StringBuilder());
+    System.out.println("处理过后的数据为:"+prop.toString());
     return prop.length() > 0 ? prop.toString() : null;
   }
 
@@ -169,8 +170,10 @@ public class MetaClass {
   }
 
   private StringBuilder buildProperty(String name, StringBuilder builder) {
+    // 对 name 进行分词
     PropertyTokenizer prop = new PropertyTokenizer(name);
     if (prop.hasNext()) {
+      // 获取属性名
       String propertyName = reflector.findPropertyName(prop.getName());
       if (propertyName != null) {
         builder.append(propertyName);

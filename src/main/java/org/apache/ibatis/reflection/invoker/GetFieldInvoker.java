@@ -29,11 +29,14 @@ public class GetFieldInvoker implements Invoker {
     this.field = field;
   }
 
+
+  // 获取属性
   @Override
   public Object invoke(Object target, Object[] args) throws IllegalAccessException {
     try {
       return field.get(target);
     } catch (IllegalAccessException e) {
+      // 若不可达则进行相应的提权操作
       if (Reflector.canControlMemberAccessible()) {
         field.setAccessible(true);
         return field.get(target);

@@ -31,6 +31,7 @@ public class MethodInvoker implements Invoker {
   public MethodInvoker(Method method) {
     this.method = method;
 
+    // 当方法参数列表为1时，一般代表为setter方法，反之为getter方法
     if (method.getParameterTypes().length == 1) {
       type = method.getParameterTypes()[0];
     } else {
@@ -38,6 +39,14 @@ public class MethodInvoker implements Invoker {
     }
   }
 
+  /**
+   * 执行对应的方法，若存在权限问题，则进行相应的提权操作
+   * @param target
+   * @param args
+   * @return
+   * @throws IllegalAccessException
+   * @throws InvocationTargetException
+   */
   @Override
   public Object invoke(Object target, Object[] args) throws IllegalAccessException, InvocationTargetException {
     try {

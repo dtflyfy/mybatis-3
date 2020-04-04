@@ -46,10 +46,28 @@ import org.xml.sax.SAXParseException;
  */
 public class XPathParser {
 
+  /**
+   * xml document 对象
+   */
   private final Document document;
+
+  /**
+   * 是否进行相关的校验工作
+   */
   private boolean validation;
+  /**
+   * xml 实体解析器
+   */
   private EntityResolver entityResolver;
+
+  /**
+   * 变量 Properties 对象
+   */
   private Properties variables;
+
+  /**
+   * Java Xpath对象
+   */
   private XPath xpath;
 
   public XPathParser(String xml) {
@@ -227,6 +245,11 @@ public class XPathParser {
     }
   }
 
+  /**
+   * 将xml文件解析并创建为Document对象
+   * @param inputSource  xml 的 InputSource 对象
+   * @return Document 对象
+   */
   private Document createDocument(InputSource inputSource) {
     // important: this must only be called AFTER common constructor
     try {

@@ -37,6 +37,10 @@ public class JndiDataSourceFactory implements DataSourceFactory {
 
   private DataSource dataSource;
 
+  /**
+   * dataSource不在构造方法中创建，而是在setProperties方法中完成了创建工作
+   * @param properties
+   */
   @Override
   public void setProperties(Properties properties) {
     try {
